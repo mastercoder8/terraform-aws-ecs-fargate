@@ -13,8 +13,8 @@ module ecs-cluster {
 # ECS Task Definition
 #------------------------------------------------------------------------------
 module "td" {
-  source  = "cn-terraform/ecs-fargate-task-definition/aws"
-  version = "1.0.11"
+  source  = "github.com/mastercoder8/terraform-aws-ecs-fargate-task-definition"
+  # version = "1.0.11"
   # source  = "../terraform-aws-ecs-fargate-task-definition"
 
   name_preffix                 = var.name_preffix
@@ -106,7 +106,7 @@ module "ecs-fargate-service" {
   source  = "cn-terraform/ecs-fargate-service/aws"
   version = "2.0.4"
   # source  = "../terraform-aws-ecs-fargate-service"
-
+  depends_on  = [module.ecs-alb.aws_lb_lb_arn]
   name_preffix = var.name_preffix
   vpc_id       = var.vpc_id
 
